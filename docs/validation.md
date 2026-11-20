@@ -19,4 +19,4 @@ Concurrent writers can still change files between filesystem calls. The tool rec
 
 The ZIP was extracted into a fresh temporary directory and its CLI preview/apply/undo sequence was executed on a synthetic file, with the original contents restored. The npm tarball was installed in a separate temporary project without runtime dependencies; its module exports were imported and its executable started the loopback web page. ZIP/npm manifests exclude runtime settings, demo folders, undo journals and node_modules. The npm cache was redirected to a disposable directory after the host cache rejected a write; no cache ownership or permission controls were changed.
 
-GitHub publication does not include an Actions workflow: the connected OAuth authorization lacks workflow scope. Local test results are recorded; account permissions were not changed.
+The first repository-creation push rejected the Actions workflow under its OAuth authorization. A direct Git push subsequently accepted the workflow using the existing Git credentials. No account permission controls were changed. The repository includes the test workflow; local results are recorded separately.
