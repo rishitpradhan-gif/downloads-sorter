@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="local-token" content="__LOCAL_TOKEN__" />
+    <title>Downloads Sorter</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.mjs"></script>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="brand"
+        ><svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 10h10l3 4h11v13H4zM4 10V6h10l3 4h11v4" /></svg
+        >Downloads Sorter</a
+      ><span class="local-label">On your computer</span
+      ><button id="help">Help</button>
+    </header>
+    <main>
+      <section class="folder-bar">
+        <div>
+          <h1 id="folder-title">Choose a folder</h1>
+          <p id="folder-summary">
+            Nothing moves until you review a preview or turn on automatic
+            sorting.
+          </p>
+        </div>
+        <div class="actions">
+          <button id="demo" class="secondary">Try a demo</button
+          ><button id="choose" class="primary">Choose folder</button>
+        </div>
+      </section>
+      <details class="path-editor">
+        <summary>Enter a folder path</summary>
+        <form id="path-form">
+          <label
+            >Folder path<input
+              id="folder-path"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Paste the full path to your Downloads folder" /></label
+          ><button class="secondary" type="submit">Use this folder</button>
+        </form>
+      </details>
+      <section class="workspace">
+        <div class="main-panel">
+          <nav aria-label="Workspace">
+            <button data-tab="preview" aria-selected="true">Preview</button
+            ><button data-tab="history" aria-selected="false">History</button
+            ><button data-tab="rules" aria-selected="false">Rules</button>
+          </nav>
+          <div id="preview-panel">
+            <div class="panel-header">
+              <h2 id="preview-title">Files</h2>
+              <button id="preview" class="secondary" disabled>
+                Preview sorting
+              </button>
+            </div>
+            <div id="empty">
+              <svg viewBox="0 0 160 120" aria-hidden="true">
+                <path d="M23 39h43l13 14h58v53H23zM23 39V24h43l13 15h58v14" />
+                <path d="M48 76h64M48 88h42" />
+              </svg>
+              <p>Choose a folder or try the demo.</p>
+            </div>
+            <div id="file-list"></div>
+            <div id="skipped"></div>
+            <div id="approve-bar" hidden>
+              <span id="move-count"></span
+              ><button id="sort" class="primary">Sort these files</button>
+            </div>
+          </div>
+          <div id="history-panel" hidden>
+            <div class="panel-header">
+              <h2>History</h2>
+              <button id="refresh-history" class="quiet">Refresh</button>
+            </div>
+            <div id="history-list"></div>
+            <p class="footnote">
+              Undo checks the file fingerprint and original name. Changed files
+              and occupied names are left alone.
+            </p>
+          </div>
+          <div id="rules-panel" hidden>
+            <div class="panel-header">
+              <h2>Sorting rules</h2>
+              <button id="save-rules" class="primary">Save rules</button>
+            </div>
+            <p class="rules-note">
+              First matching rule wins. Filename words and file extensions are
+              alternatives.
+            </p>
+            <div id="rule-list"></div>
+            <div class="actions">
+              <button id="add-rule" class="secondary">Add rule</button
+              ><button id="default-rules" class="quiet">
+                Restore defaults
+              </button>
+            </div>
+          </div>
+        </div>
+        <aside>
+          <div class="auto-illustration">
+            <svg viewBox="0 0 230 150" aria-hidden="true">
+              <path
+                d="M30 32h36v44H30zM38 44h20M38 52h20M38 60h14M100 42h28l8 8h31v45h-67zM100 42v-8h28l8 8h31v8M149 103h19l6 7h26v29h-51z"
+              />
+              <path d="M74 55h16M82 51l4 4-4 4M130 104v14h10" />
+            </svg>
+          </div>
+          <div class="auto-heading">
+            <h2>Automatic sorting</h2>
+            <span id="auto-state">Off</span>
+          </div>
+          <p>
+            New files go to their matching folders after they’ve been unchanged
+            for 15 seconds.
+          </p>
+          <button id="automatic" class="secondary" disabled>Turn on</button>
+          <p class="footnote">
+            Runs while the launcher is open. Existing files stay put. Use
+            Preview to sort them.
+          </p>
+          <div id="last-error" role="alert"></div>
+          <details class="details">
+            <summary>What stays untouched?</summary>
+            <p>
+              Folders, shortcuts, hidden files, incomplete downloads, files over
+              2 GiB and names without a matching rule.
+            </p>
+            <p>
+              No cloud upload. No account. Nothing is sent to a third party.
+            </p>
+          </details>
+        </aside>
+      </section>
+      <footer>
+        <span id="status" role="status" aria-live="polite">Ready</span
+        ><span>Keep the launcher open for automatic sorting.</span>
+      </footer>
+    </main>
+    <dialog id="help-dialog">
+      <button id="close-help" class="quiet">Close</button>
+      <h2>Using Downloads Sorter</h2>
+      <ol>
+        <li>Choose the folder you want to organize.</li>
+        <li>Select Preview sorting. Review each destination.</li>
+        <li>Select Sort these files to move the listed files.</li>
+        <li>Use History to undo a run.</li>
+      </ol>
+      <p>
+        Automatic sorting handles new files only while the app is running. Rules
+        can be edited; saving rules stops automatic mode so you can review the
+        change.
+      </p>
+      <p>
+        Sorting keeps file contents and avoids overwriting existing names. Other
+        apps can still change files, so close editors and downloads before
+        organizing. Keep a backup of important work.
+      </p>
+      <p>
+        Undo records live inside the selected folder, in
+        <code>.downloads-sorter</code>. Keep that folder if you want to undo.
+      </p>
+      <p>
+        To stop the app, close its launcher window or press Ctrl+C there.
+        Closing this browser tab alone does not stop the local server.
+      </p>
+    </dialog>
+  </body>
+</html>

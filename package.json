@@ -1,0 +1,40 @@
+{
+  "name": "@rishitpradhan/downloads-sorter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local Downloads organizer with previews, automatic sorting and checked undo.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs --open",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "package": "python3 scripts/package.py"
+  },
+  "exports": "./lib/sorter.mjs",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  },
+  "bin": {
+    "downloads-sorter": "server.mjs"
+  },
+  "files": [
+    "lib",
+    "public",
+    "server.mjs",
+    "cli.mjs",
+    "Open Downloads Sorter.command",
+    "Start Downloads Sorter.bat",
+    "start.sh",
+    "README.md",
+    "LICENSE",
+    "docs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rishitpradhan-gif/downloads-sorter.git"
+  }
+}

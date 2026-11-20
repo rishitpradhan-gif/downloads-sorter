@@ -1,0 +1,13 @@
+{
+  "executed_at": "2026-11-20T03:34:30.384Z",
+  "checks": [
+    "Demo preview lists five moves and leaves all synthetic source files untouched",
+    "Approved sort moves only demo files; History undo restores their contents",
+    "Automatic mode can be enabled and stopped explicitly",
+    "Invalid rule destinations are rejected; defaults can be restored and saved",
+    "Preview, History and Rules fit a 390px viewport",
+    "Help works; no uncaught errors or external requests occur"
+  ],
+  "passed": true,
+  "limitations": "Chromium headless desktop and emulated phone, synthetic files only. Native folder dialogs and Windows/Linux launchers were not executed."
+}
